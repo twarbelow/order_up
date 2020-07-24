@@ -15,3 +15,5 @@ RSpec.describe 'dish show page' do
     expect(page).to have_content("#{jelly.name}")
     expect(page).to have_content("#{bread.name}")
     expect(page).to have_content("Made by chef: #{jordan.name}")
+  end
+end
