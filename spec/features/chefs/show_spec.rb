@@ -37,4 +37,5 @@ RSpec.describe 'chef show page' do
     expect(page).to have_content("#{jelly.name}")
     expect(page).to have_content("#{bread.name}")
     expect(page).to have_content("#{nanners.name}")
+  end
 end
