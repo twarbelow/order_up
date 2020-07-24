@@ -8,7 +8,7 @@ RSpec.describe 'dish show page' do
     jelly = yum.ingredients.create(name: "raspberry jelly", calories: 80)
     bread = yum.ingredients.create(name: "bread", calories: 120)
 
-    visit "dish/#{yum.id}"
+    visit "dishes/#{yum.id}"
 
     expect(page).to have_content("Ingredients:")
     expect(page).to have_content("#{peanut_butter.name}")
