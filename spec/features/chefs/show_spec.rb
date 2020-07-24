@@ -32,7 +32,7 @@ RSpec.describe 'chef show page' do
 
     click_on "See Ingredients Used"
 
-    expect(page).to have_content("Ingredients Used:")
+    expect(page).to have_content("Ingredients Used By Chef #{jordan.name}:")
     expect(page).to have_content("#{peanut_butter.name}")
     expect(page).to have_content("#{jelly.name}")
     expect(page).to have_content("#{bread.name}")

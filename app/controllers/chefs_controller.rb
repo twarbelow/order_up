@@ -4,6 +4,6 @@ class ChefsController < ApplicationController
   end
 
   def ingredients
-    @ingredients = Chef.find(params[:id]).ingredients.uniq
+    @chef = Chef.find(params[:id])
   end
 end
