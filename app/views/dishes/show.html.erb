@@ -4,6 +4,8 @@
   <% @dish.ingredients.each do |ingredient| %>
     <p><%= ingredient.name %>
   <% end %>
+  <br>
+  <p>Total Calories: <%= @dish.calories %></p>
 </section>
 <section class="chef">
   <h2>Made by chef: <%= @dish.chef.name %></h2>

@@ -16,4 +16,17 @@ RSpec.describe 'dish show page' do
     expect(page).to have_content("#{bread.name}")
     expect(page).to have_content("Made by chef: #{jordan.name}")
   end
+
+  it 'shows total calorie count' do
+    jordan = Chef.create(name: "Jordan Feldstein")
+    yum = Dish.create(name: "PBJ", description: "peanut butter jelly time", chef_id: "#{jordan.id}")
+    peanut_butter = yum.ingredients.create(name: "peanut butter", calories: 150)
+    jelly = yum.ingredients.create(name: "raspberry jelly", calories: 80)
+    bread = yum.ingredients.create(name: "bread", calories: 120)
+    total = jelly.calories + bread.calories + peanut_butter.calories
+
+    visit "dishes/#{yum.id}"
+
+    expect(page).to have_content("Total Calories: #{total}")
+  end
 end
