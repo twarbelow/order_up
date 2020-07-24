@@ -38,4 +38,34 @@ RSpec.describe 'chef show page' do
     expect(page).to have_content("#{bread.name}")
     expect(page).to have_content("#{nanners.name}")
   end
+
+  it 'shows 3 most popular ingredients that the chef uses' do
+  jordan = Chef.create(name: "Jordan Feldstein")
+  yum = Dish.create(name: "PBJ", description: "peanut butter jelly time", chef_id: "#{jordan.id}")
+  peanut_butter = yum.ingredients.create(name: "peanut butter", calories: 150)
+  jelly = yum.ingredients.create(name: "raspberry jelly", calories: 80)
+  bread = yum.ingredients.create(name: "bread", calories: 120)
+  yum_extra_nanners = Dish.create(name: "PBJ + Nanners", description: "peanut butter jelly time, but with nanners", chef_id: "#{jordan.id}")
+  yum_extra_nanners.ingredients << peanut_butter
+  yum_extra_nanners.ingredients << peanut_butter
+  yum_extra_nanners.ingredients << peanut_butter
+  yum_extra_nanners.ingredients << jelly
+  yum_extra_nanners.ingredients << jelly
+  yum_extra_nanners.ingredients << bread
+  yum_extra_nanners.save
+  nanners = yum_extra_nanners.ingredients.create(name: "nanners", calories: 40)
+
+  visit "chefs/#{jordan.id}"
+
+  expect(page).to have_content("Top 3 Ingredients Used:")
+  expect(page).to have_content("1. #{peanut_butter.name}")
+  expect(page).to have_content("2. #{jelly.name}")
+  expect(page).to have_content("3. #{bread.name}")
+
+  end
 end
+
+As a visitor
+When I visit a chef's show page
+I see the three most popular ingredients that the chef uses in their dishes
+(Popularity is based off of how many dishes use that ingredient)
