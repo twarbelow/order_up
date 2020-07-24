@@ -45,15 +45,14 @@ RSpec.describe 'chef show page' do
   peanut_butter = yum.ingredients.create(name: "peanut butter", calories: 150)
   jelly = yum.ingredients.create(name: "raspberry jelly", calories: 80)
   bread = yum.ingredients.create(name: "bread", calories: 120)
-  yum_extra_nanners = Dish.create(name: "PBJ + Nanners", description: "peanut butter jelly time, but with nanners", chef_id: "#{jordan.id}")
-  yum_extra_nanners.ingredients << peanut_butter
-  yum_extra_nanners.ingredients << peanut_butter
+  yum_extra_nanners = Dish.create(name: "PBJ + Nanners", description: "peanut butter jelly time, but with nanners, no bread", chef_id: "#{jordan.id}")
   yum_extra_nanners.ingredients << peanut_butter
   yum_extra_nanners.ingredients << jelly
-  yum_extra_nanners.ingredients << jelly
-  yum_extra_nanners.ingredients << bread
   yum_extra_nanners.save
   nanners = yum_extra_nanners.ingredients.create(name: "nanners", calories: 40)
+  pb = Dish.create(name: "PEANUT BUTTER", description: "peanut butter in a spoon", chef_id: "#{jordan.id}")
+  pb.ingredients << peanut_butter
+  pb.save
 
   visit "chefs/#{jordan.id}"
 
@@ -64,8 +63,3 @@ RSpec.describe 'chef show page' do
 
   end
 end
-
-As a visitor
-When I visit a chef's show page
-I see the three most popular ingredients that the chef uses in their dishes
-(Popularity is based off of how many dishes use that ingredient)
